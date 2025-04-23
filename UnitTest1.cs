@@ -17,13 +17,18 @@ public class Tests
     }
 
     [Test]
+    // Test case to verify that a user can sign up for an account
     public void UserSignUp()
     {
+        // Create an instance of the HomePage
         var homePage = new HomePage(driver);
         homePage.GoToLoginPage();
 
+        // Create an instance of the LoginPage
         var loginPage = new LoginPage(driver);
-        loginPage.SignUp("jeremiahsoyebo", "jeremiahsoyebowalat@gmail.com");
+        // Sign up for an account
+        loginPage.SignUp("jeremiahsoyebo", "jeremiahsoyebotest@gmail.com");
+        // Enter the account info afterchoosing a username and an email
         loginPage.EnterAccountInfo(
             title: 1,
             password: "newpassword11",
@@ -43,16 +48,45 @@ public class Tests
     }
 
     [Test]
+    // Test Case to verify that a user can delete their account
     public void DeleteAccount()
     {
         var homePage = new HomePage(driver);
         homePage.GoToLoginPage();
 
         var loginPage = new LoginPage(driver);
+        // Login into a valid account
         loginPage.Login("jeremiahsoyebowala@gmail.com", "newpassword11");
+        // Delete the account
         homePage.DeleteAccount();
 
         Thread.Sleep(3000);
+    }
+
+    [Test]
+    // Test case to verify that an invalid user cannot login
+    public void VerifyInvalidUser()
+    {
+        var homePage = new HomePage(driver);
+        homePage.GoToLoginPage();
+
+        var loginPage = new LoginPage(driver);
+        // Attempt to login with an invalid user
+        loginPage.Login("jeremiahplockey@gmail.com", "newpassword11");
+
+        // Verify that the error message is visible by checking the text inside the <p> tag
+        var errorMessage = driver.FindElement(By.XPath("//p[contains(text(),'Your email or password is incorrect!')]"));
+        Assert.IsTrue(errorMessage.Displayed, "Error message for incorrect login not displayed.");
+    }
+
+    [Test]
+    public void LogoutUser()
+    {
+        var homePage = new HomePage(driver);
+        homePage.GoToLoginPage();
+
+        var loginPage = new LoginPage(driver);
+        loginPage.Login("jeremiahsoyebotest@gmail.com", "newpassword11");
     }
 
     [TearDown]
