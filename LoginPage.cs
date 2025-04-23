@@ -12,7 +12,13 @@ namespace AutomationProject
 			driver = webDriver;
 		}
 
-		// Fields for signing up
+        // Fields for logging in
+        private IWebElement LoginEmail => driver.FindElement(By.CssSelector("input[data-qa='login-email']"));
+        private IWebElement LoginPassword => driver.FindElement(By.CssSelector("input[data-qa='login-password']"));
+        private IWebElement LoginButton => driver.FindElement(By.CssSelector("input[data-qa='login-button']"));
+
+
+        // Fields for signing up
         private IWebElement SignupNameInput => driver.FindElement(By.CssSelector("input[data-qa='signup-name']"));
         private IWebElement SignupEmailInput => driver.FindElement(By.CssSelector("input[data-qa='signup-email']"));
 
@@ -34,6 +40,13 @@ namespace AutomationProject
         private IWebElement MobileNumber => driver.FindElement(By.CssSelector("input[data-qa='mobile_number']"));
         private IWebElement CreateAccount => driver.FindElement(By.CssSelector("button[data-qa='create-account']"));
 
+        public void Login(string email, string password)
+        {
+            LoginEmail.SendKeys(email);
+            LoginPassword.SendKeys(password);
+            LoginButton.Click();
+        }
+
         public void SignUp(string name, string email)
 		{
 			SignupNameInput.SendKeys(name);
@@ -41,13 +54,13 @@ namespace AutomationProject
 			SignupButton.Click();
 		}
 
-		public void EnterAccountInfo(int title, int birthDay, int birthMonth, int birthYear, string address, string firstName, string lastName, string country, string state, string city, string zipcode, string mobileNumber, string name = null, string email = null)
+		public void EnterAccountInfo(int title, string password, int birthDay, int birthMonth, int birthYear, string address, string firstName, string lastName, string country, string state, string city, string zipcode, string mobileNumber, string name = null, string email = null)
 		{
 			// Find and click the radio button chosen by the user
 			var genderRadio = driver.FindElement(By.Id($"id_gender{title}"));
 			genderRadio.Click();
 			
-            Password.SendKeys("newpassword11");
+            Password.SendKeys(password);
 			// Find the click the dropdown for the day of birth
 			BirthDay.Click();
 			// Click the day from the dropdown

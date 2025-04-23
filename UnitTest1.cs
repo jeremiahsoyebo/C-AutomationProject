@@ -23,9 +23,10 @@ public class Tests
         homePage.GoToLoginPage();
 
         var loginPage = new LoginPage(driver);
-        loginPage.SignUp("jeremiahsoyebo", "jeremiahsoyebowala@gmail.com");
+        loginPage.SignUp("jeremiahsoyebo", "jeremiahsoyebowalat@gmail.com");
         loginPage.EnterAccountInfo(
             title: 1,
+            password: "newpassword11",
             birthDay: 7,
             birthMonth: 12,
             birthYear: 2001,
@@ -39,6 +40,19 @@ public class Tests
             mobileNumber: "555-0013"
 
             );
+    }
+
+    [Test]
+    public void DeleteAccount()
+    {
+        var homePage = new HomePage(driver);
+        homePage.GoToLoginPage();
+
+        var loginPage = new LoginPage(driver);
+        loginPage.Login("jeremiahsoyebowala@gmail.com", "newpassword11");
+        homePage.DeleteAccount();
+
+        Thread.Sleep(3000);
     }
 
     [TearDown]
