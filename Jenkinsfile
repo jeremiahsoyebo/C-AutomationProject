@@ -11,19 +11,19 @@ pipeline {
 
         stage('Restore') {
             steps {
-                sh 'dotnet restore AutomationProject.csproj'
+                sh '/usr/local/share/dotnet/dotnet dotnet restore AutomationProject.csproj'
             }
         }
 
         stage('Build') {
             steps {
-                sh 'dotnet build AutomationProject.csproj --configuration Release'
+                sh '/usr/local/share/dotnet/dotnet dotnet build AutomationProject.csproj --configuration Release'
             }
         }
 
         stage('Test') {
             steps {
-                sh 'dotnet test AutomationProject.csproj --configuration Release'
+                sh '/usr/local/share/dotnet/dotnet dotnet test AutomationProject.csproj --configuration Release'
             }
         }
     }
