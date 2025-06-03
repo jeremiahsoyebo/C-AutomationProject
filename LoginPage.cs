@@ -6,16 +6,18 @@ namespace AutomationProject
 	public class LoginPage
 	{
 		private IWebDriver driver;
+        private IJavaScriptExecutor js;
 
-		public LoginPage(IWebDriver webDriver)
+        public LoginPage(IWebDriver webDriver)
 		{
-			driver = webDriver;
-		}
+			this.driver = webDriver;
+            this.js = (IJavaScriptExecutor)driver;
+        }
 
         // Fields for logging in
         private IWebElement LoginEmail => driver.FindElement(By.CssSelector("input[data-qa='login-email']"));
         private IWebElement LoginPassword => driver.FindElement(By.CssSelector("input[data-qa='login-password']"));
-        private IWebElement LoginButton => driver.FindElement(By.CssSelector("input[data-qa='login-button']"));
+        private IWebElement LoginButton => driver.FindElement(By.CssSelector("button[data-qa='login-button']"));
 
 
         // Fields for signing up
@@ -56,8 +58,9 @@ namespace AutomationProject
 
 		public void EnterAccountInfo(int title, string password, int birthDay, int birthMonth, int birthYear, string address, string firstName, string lastName, string country, string state, string city, string zipcode, string mobileNumber, string name = null, string email = null)
 		{
-			// Find and click the radio button chosen by the user
-			var genderRadio = driver.FindElement(By.Id($"id_gender{title}"));
+            js.ExecuteScript("window.scrollBy(0, 500);");
+            // Find and click the radio button chosen by the user
+            var genderRadio = driver.FindElement(By.Id($"id_gender{title}"));
 			genderRadio.Click();
 			
             Password.SendKeys(password);
@@ -73,10 +76,13 @@ namespace AutomationProject
             BirthYear.Click();
             // Click the year from the dropdown
             driver.FindElement(By.CssSelector($"option[value='{birthYear}']")).Click();
-            // Fill in the first and last name, then address
+            // Fill in the first and last name, then address. Scroll into the view first
             FirstName.SendKeys(firstName);
             LastName.SendKeys(lastName);
             Address.SendKeys(address);
+
+            Country.Click();
+
             Country.Click();
             driver.FindElement(By.CssSelector($"option[value='{country}']")).Click();
             State.SendKeys(state);
@@ -87,7 +93,6 @@ namespace AutomationProject
             // Create the account
             CreateAccount.Click();
 
-            Thread.Sleep(3000);
         }
     }
 }
