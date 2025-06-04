@@ -28,7 +28,7 @@ public class Tests
         // Create an instance of the LoginPage
         var loginPage = new LoginPage(driver);
         // Sign up for an account
-        loginPage.SignUp("jebbytowntest", "jebtownhouset@gmail.com");
+        loginPage.SignUp("jebbytowah", "jebtownhousetowah@gmail.com");
         // Enter the account info afterchoosing a username and an email
         loginPage.EnterAccountInfo(
             title: 1,
@@ -57,7 +57,7 @@ public class Tests
 
         var loginPage = new LoginPage(driver);
         // Login into a valid account
-        loginPage.Login("jeremiahsoyebowala@gmail.com", "newpassword11");
+        loginPage.Login("jebtownhousetowah@gmail.com", "newpassword11");
         // Delete the account
         homePage.DeleteAccount();
 
@@ -73,7 +73,7 @@ public class Tests
 
         var loginPage = new LoginPage(driver);
         // Attempt to login with an invalid user
-        loginPage.Login("jeremiahplockey@gmail.com", "newpassword11");
+        loginPage.Login("jebtownhousetowah@gmail.com", "newpassword11");
 
         // Verify that the error message is visible by checking the text inside the <p> tag
         var errorMessage = driver.FindElement(By.XPath("//p[contains(text(),'Your email or password is incorrect!')]"));

@@ -56,7 +56,7 @@ namespace AutomationProject
 			SignupButton.Click();
 		}
 
-		public void EnterAccountInfo(int title, string password, int birthDay, int birthMonth, int birthYear, string address, string firstName, string lastName, string country, string state, string city, string zipcode, string mobileNumber, string name = null, string email = null)
+		public void EnterAccountInfo(int title, string password, int birthDay, int birthMonth, int birthYear, string address, string firstName, string lastName, string country, string state, string city, string zipcode, string mobileNumber, string? name = null, string? email = null)
 		{
             js.ExecuteScript("window.scrollBy(0, 500);");
             // Find and click the radio button chosen by the user
