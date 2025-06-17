@@ -1,2 +1,2 @@
 # C-AutomationProject
-Automation Project using C# with Selenium Webdriver
+UI Automation Project using C# with Selenium Webdriver
